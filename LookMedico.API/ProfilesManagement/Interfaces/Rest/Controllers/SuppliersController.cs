@@ -33,6 +33,16 @@ public class SuppliersController: ControllerBase
         return resources;
     }
 
+    [HttpGet("{id}")]
+    public async Task<SupplierResource> GetById(string id)
+    {
+        var doctor = await _supplierService.GetByIdAsync(id);
+        var resource = _mapper.Map<Supplier, SupplierResource>(doctor);
+        return resource;
+    }
+
+    
+    
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SaveSupplierResource resource)
     {
