@@ -32,8 +32,14 @@ public class DoctorsController: ControllerBase
         var resources = _mapper.Map<IEnumerable<Doctor>, IEnumerable<DoctorResource>>(doctors);
         return resources;
     }
-    
+
     [HttpGet("{id}")]
+    public async Task<DoctorResource> GetById(string id)
+    {
+        var doctor = await _doctorService.GetByIdAsync(id);
+        var resource = _mapper.Map<Doctor, DoctorResource>(doctor);
+        return resource;
+    }
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SaveDoctorResource resource)

@@ -1,6 +1,6 @@
 using LookMedico.API.ProfilesManagement.Domain.Models;
 using LookMedico.API.ProfilesManagement.Domain.Repositories;
-using LookMedico.API.Shared.Persistence.Context;
+using LookMedico.API.Shared.Persistence.Contexts;
 using LookMedico.API.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,26 +14,26 @@ public class SupplierRepository: BaseRepository, ISupplierRepository
 
     public async Task<IEnumerable<Supplier>> ListAsync()
     {
-        return await Context.Suppliers.ToListAsync();
+        return await _context.Suppliers.ToListAsync();
     }
 
     public async Task AddAsync(Supplier supplier)
     {
-        await Context.Suppliers.AddAsync(supplier);
+        await _context.Suppliers.AddAsync(supplier);
     }
 
     public async Task<Supplier> FindByIdAsync(string id)
     {
-        return await Context.Suppliers.FindAsync(id);
+        return await _context.Suppliers.FindAsync(id);
     }
 
     public void Update(Supplier supplier)
     {
-        Context.Suppliers.Update(supplier);
+        _context.Suppliers.Update(supplier);
     }
 
     public void Remove(Supplier supplier)
     {
-        Context.Suppliers.Remove(supplier);
+        _context.Suppliers.Remove(supplier);
     }
 }

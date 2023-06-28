@@ -1,6 +1,6 @@
 using LookMedico.API.ProfilesManagement.Domain.Models;
 using LookMedico.API.ProfilesManagement.Domain.Repositories;
-using LookMedico.API.Shared.Persistence.Context;
+using LookMedico.API.Shared.Persistence.Contexts;
 using LookMedico.API.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,26 +14,26 @@ public class DoctorRepository:BaseRepository, IDoctorRepository
 
     public async Task<IEnumerable<Doctor>> ListAsync()
     {
-        return await Context.Doctors.ToListAsync();
+        return await _context.Doctors.ToListAsync();
     }
 
     public async Task AddAsync(Doctor doctor)
     {
-        await Context.Doctors.AddAsync(doctor);
+        await _context.Doctors.AddAsync(doctor);
     }
 
     public async Task<Doctor> FindByIdAsync(string id)
     {
-        return await Context.Doctors.FindAsync(id);
+        return await _context.Doctors.FindAsync(id);
     }
 
     public void Update(Doctor doctor)
     {
-        Context.Doctors.Update(doctor);
+        _context.Doctors.Update(doctor);
     }
 
     public void Remove(Doctor doctor)
     {
-        Context.Doctors.Remove(doctor);
+        _context.Doctors.Remove(doctor);
     }
 }

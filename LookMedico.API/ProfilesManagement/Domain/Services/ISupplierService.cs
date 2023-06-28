@@ -7,6 +7,8 @@ public interface ISupplierService
 {
     Task<IEnumerable<Supplier>> ListAsync();
 
+    Task<Supplier> GetByIdAsync(string id);
+
     Task<SupplierResponse> SaveAsync(Supplier supplier);
 
     Task<SupplierResponse> UpdateAsync(string id, Supplier supplier);
