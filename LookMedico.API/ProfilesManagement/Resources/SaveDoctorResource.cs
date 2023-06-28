@@ -6,6 +6,10 @@ public class SaveDoctorResource
 {
     [Required]
     [MaxLength(30)]
+    public string Id { get; set; }
+    
+    [Required]
+    [MaxLength(30)]
     public string FirstName { get; set; }
     
     [Required]
@@ -16,7 +20,9 @@ public class SaveDoctorResource
     public string Email { get; set; }
     
     [Required]
-    public long Phone { get; set; }
+    [MinLength(9)]
+    [MaxLength(9)]
+    public string Phone { get; set; }
     
     [Required]
     public string Address { get; set; }

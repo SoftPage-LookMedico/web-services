@@ -22,8 +22,18 @@ public class DoctorService: IDoctorService
         return await _doctorRepository.ListAsync();
     }
 
+    public async Task<Doctor> GetByIdAsync(string id)
+    {
+        return await _doctorRepository.FindByIdAsync(id);
+    }
+
     public async Task<DoctorResponse> SaveAsync(Doctor doctor)
     {
+        var existingDoctor = await _doctorRepository.FindByIdAsync(doctor.Id);
+
+        if (existingDoctor != null)
+            return new DoctorResponse("Username is already user");
+        
         try
         {
             await _doctorRepository.AddAsync(doctor);
