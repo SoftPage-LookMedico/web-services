@@ -21,9 +21,21 @@ public class SupplierService: ISupplierService
     {
         return await _supplierRepository.ListAsync();
     }
+    
+    public async Task<Supplier> GetByIdAsync(string id)
+    {
+        return await _supplierRepository.FindByIdAsync(id);
+    }
+
 
     public async Task<SupplierResponse> SaveAsync(Supplier supplier)
     {
+
+        var existingSupplier = await _supplierRepository.FindByIdAsync(supplier.Id);
+
+        if (existingSupplier != null)
+            return new SupplierResponse("Username is already used.");
+        
         try
         {
             await _supplierRepository.AddAsync(supplier);
